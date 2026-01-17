@@ -1,0 +1,50 @@
+PCSX1 Author:
+    (c) 2026            fawtytoo
+
+    Steve Clark         <fawtytoo@gmx.co.uk>
+
+PCSX-Reloaded Authors/Contributors:
+    avlex               (Help on xcode project)
+    Benoît Gschwind     (MDEC decoder improvements)
+    ckain               (Various bugfixes)
+    Dario               (Various bugfixes)
+    edgbla              (Root counters, SIO1, various core/plugin fixes)
+    Firnis              (GTE code from PCSX-Revolution Project)
+    Hopkat              (Sound plugin improvements, core fixes)
+    iSage               (compressed CD-DA, migration to CMake)
+    Gabriele Gorla      (MDEC decoder)
+    MaddTheSane         (Various bugfixes)
+    maggix              (Snow Leopard compile fix)
+    NeToU               (Bugfix)
+    notaz               (Various psxbios fixes)
+    Peter Collingbourne (Various core/psxbios fixes)
+    siveritas           (Bugfix)
+    shalma              (GTE Divider, many core improvements, sound plugin fixes)
+    Tristin Celestin    (PulseAudio support)
+    UTunnels            (Mode 1 ISO support)
+    VoidMage            (Build system cleanups)
+    Wei Mingzhi         (Input plugin, iso/cheat support, misc stuff)
+    And others which I cannot keep track of
+
+df Upstream Authors:
+    (c) 2005 Ryan Schultz
+    (c) 2005 Andrew Burton
+    (c) 2007 Stephen Chao
+    (c) 2006 Marcus Comstedt
+
+    Ryan Schultz        <schultz.ryan@gmail.com>
+    Andrew Burton       <adb@iinet.net.au>
+    Stephen Chao        <schao@myrealbox.com>
+    Marcus Comstedt     <marcus@mc.pp.se>
+    Stefan Sikora       <hoshy@schrauberstube.de>
+
+PCSX Upstream Authors:
+    (c) 1999-2003       Pcsx Team
+    (c) 1998            Vision Thing
+
+    Linuzappz           <linuzappz@pcsx.net>
+    Shadow              <shadow@pcsx.net>
+    Pete Bernett        <psswitch@online.de>
+    NoComp              <NoComp@mailcity.com>
+    Nik3d
+    Akumax              <akumax@pcsx.net>
