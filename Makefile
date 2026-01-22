@@ -1,4 +1,3 @@
-PWD = $(notdir $(shell pwd | sed 's/b//'))
 
 TARGET = pcsx1
 
@@ -16,9 +15,6 @@ OBJS += $(O)/main.o $(O)/system.o
 
 all:	dir $(OBJS)
 	$(CC) $(OBJS) -o $(TARGET) $(LDFLAGS)
-
-$(O)/main.o:
-	$(CC) $(CFLAGS) -DBUILD=\"$(PWD)\" -c $(SRC)/main.c -o $(O)/main.o
 
 $(O)/%.o:	$(SRC)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
