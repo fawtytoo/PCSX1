@@ -4,6 +4,7 @@
 
 #include <SDL2/SDL.h>
 
+#include "../include.h"
 #include "sio.h"
 #include "system.h"
 #include "pad.h"
@@ -67,6 +68,43 @@ char                        *gameFile[5] = {"", "", "", "", ""};
 bool                        getMouse = 0;
 
 void (*PsxExecute)(void);
+
+// help ------------------------------------------------------------------------
+#define HELP(s, c)      for (i = 0; i < c; i++) { printf("    %-16s - %s\n", s[i].name, s[i].description); }
+
+#define HELP_COUNT      7
+#define KEY_COUNT       9
+
+typedef struct
+{
+    char    *name;
+    char    *description;
+}
+OPTION;
+
+static OPTION           emuHelp[HELP_COUNT] =
+{
+    {"-disc FILE", "Load game image file (.toc)"},
+    {"-cfg FILE", "Load configuration file(s)"},
+    {"-psxout", "Enable PSX output"},
+    {"-bios FILE", "Load SONY BIOS file"},
+    {"-region $", "Force region: $ = NTSC/PAL"},
+    {"-mcd $ FILE", "$ = create/load1/load2 memory card"},
+    {"-mute", "Start with audio muted"}
+};
+
+static OPTION           fnKey[KEY_COUNT] =
+{
+    {"F2", "Toggle mouse capture"},
+    {"F3", "Toggle audio mute/unmute"},
+    {"F5", "Reset emulator"},
+    {"F10", "Toggle widescreen"},
+    {"F11", "Fullscreen/window mode"},
+    {"Escape", "Power off"},
+    {"Pause", "Pause emulator"},
+    {"1-5", "Insert disc"},
+    {"0", "Eject disc"}
+};
 
 void PowerOff()
 {
@@ -303,6 +341,10 @@ void SysUpdate()
                 CaptureMouse(getMouse);
                 break;
 
+              case SDLK_F3:
+                audioPlay ^= 0xffff;
+                break;
+
               case SDLK_F5:
                 texWidth = texHeight = 0;
                 texSizePending = 1;
@@ -313,15 +355,6 @@ void SysUpdate()
                 PSX_Reset();
                 break;
 
-              case SDLK_PAUSE:
-                psxPaused ^= 1;
-                PsxExecute = psxPaused ? DoPause : DoStart;
-                break;
-
-              case SDLK_F9:
-                audioPlay ^= 0xffff;
-                break;
-
               case SDLK_F10:
                 Config.Widescreen = !Config.Widescreen;
                 AdjustAspect();
@@ -330,6 +363,11 @@ void SysUpdate()
               case SDLK_F11:
                 winFullscreen ^= 1;
                 SDL_SetWindowFullscreen(sdlWindow, FULLSCREEN);
+                break;
+
+              case SDLK_PAUSE:
+                psxPaused ^= 1;
+                PsxExecute = psxPaused ? DoPause : DoStart;
                 break;
 
               case SDLK_ESCAPE:
@@ -406,9 +444,8 @@ int main(int argc, char **argv)
     SDL_AudioSpec   want;
     int             help = 0;
     int             i;
-    char            *build = TITLE" version 0."BUILD" ("__DATE__")";
+    char            *build = TITLE" "VERSION;
     int             disc = 0;
-    char            *cfg = "";
 
     for (i = 1; i < argc; i++)
     {
@@ -422,7 +459,7 @@ int main(int argc, char **argv)
         }
         else if (!strcmp(argv[i], "-cfg") && i + 1 < argc)
         {
-            cfg = argv[i + 1];
+            Cfg_Load(argv[i + 1]);
             i += 1;
         }
         else if (!strcmp(argv[i], "-psxout"))
@@ -476,6 +513,10 @@ int main(int argc, char **argv)
             }
             Config.RegionAuto = false;
         }
+        else if (strcmp(argv[i], "-keys") == 0)
+        {
+            help = 2;
+        }
         else if (!strcmp(argv[i], "-mute"))
         {
             audioMute = true;
@@ -486,25 +527,21 @@ int main(int argc, char **argv)
         }
     }
 
-    SysPrintf("Running %s\n", build);
+    printf("Running %s\n", build);
 
-    if (argc == 1 || help)
+    if (help == 2)
     {
-        printf("%s\n", build);
-        printf("%s [options]\n", argv[0]);
-        printf("-disc FILE\t- Load game image file (.toc)\n"
-               "-cfg FILE\t- Load configuration file\n"
-               "-psxout\t\t- Enable PSX output\n"
-               "-bios FILE\t- Load SONY BIOS file\n"
-               "-region $\t- Force region: $ = NTSC/PAL\n"
-               "-mcd $ FILE\t- $ = create/load1/load2 memory card\n"
-               "-mute\t\t- Start with audio muted\n");
-
-         return 0;
+        printf("  Emulator keys:\n");
+        HELP(fnKey, KEY_COUNT);
+        argc--;
     }
 
-    Cfg_Load("PCSX1.CFG");
-    Cfg_Load(cfg);
+    if (argc == 1 || help == 1)
+    {
+        printf("  Command line options:\n");
+        HELP(emuHelp, HELP_COUNT);
+        return 0;
+    }
 
     // this also sets bios region
     Psx_MemInit();
