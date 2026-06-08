@@ -1,19 +1,22 @@
-/***************************************************************************
-                         externals.h  -  description
-                             -------------------
-    begin                : Wed May 15 2002
-    copyright            : (C) 2002 by Pete Bernert
-    email                : BlackDove@addcom.de
- ***************************************************************************/
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version. See also the license.txt file for *
- *   additional informations.                                              *
- *                                                                         *
- ***************************************************************************/
+/*
+    Copyright (C) 1999-2003 Pcsx Team
+    Copyright (C) 2007      PCSX-df Team
+    Copyright (C) 2009      PCSX-Reloaded Authors/Contributors
+    Copyright (C) 2026      PCSX1 - Steve Clark
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+                                                                              */
 
 #ifndef __EXTERNALS__
 #define __EXTERNALS__
